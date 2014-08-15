@@ -129,7 +129,7 @@ Examples:
 
 
 # Text format cases
-  Scenario: Verify return Status code for HANDSHAKE_MESSAGES Server
+Scenario: Verify return Status code for HANDSHAKE_MESSAGES Server
     When I send a POST request to "https://myserver-with-some-endpoint-accepting-post-xml-octetstream-payload" with the following text-xml-payload
       """
       <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
