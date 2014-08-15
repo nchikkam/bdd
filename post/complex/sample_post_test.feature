@@ -96,38 +96,6 @@ When I send a POST request to "https://myserver-with-some-endpoint-accepting-pos
 |52.08805, 12.67829|
 
 
-Scenario Outline: Verify various API return Status codes for HANDSHAKE_MESSAGES Server for MACHINE_CODE_FORMAT Format
-    When I POST a MACHINE_CODE_FORMAT API request to "https://myserver-with-some-endpoint-accepting-post-xml-octetstream-payload" with the following text-xml-payload
-      """
-      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-      <sample-session>
-        <custom-standard format="MACHINE_CODE_FORMAT" messagesize="50000" sessionsize="1000">
-          <sample-code_0 id="ref-format-code_0" version="1.3"/>
-          <sample-code_0 id="ref-format-code_1" version="1.0"/>
-          <tool id="tool-format-id-0" version="3.0"/>
-          <tool id="tool-format-id-1" version="1.0" session-limit="17"/>
-        </custom-standard>
-        <markets current="DE" destination="FR"/>
-        <general>
-          <parameter name="region-limit" value="1"/>
-          <parameter name="session-limit" value="600"/>
-          <parameter name="time-limit" value="300"/>
-          <parameter name="frequency" value="180"/>
-        </general>
-      </sample-session>
-    """ 
-     Then the intSessionResponse for the MACHINE_CODE_FORMAT API requested should be "200"
-     Then /^I should see: "<expectedHttpStatusCode>" for MACHINE_CODE_FORMAT format if I query "<%= handshake-server %>" with the handshakePayload: "<handshakePayload>" 
-     
-Examples:
-|testCaseType|handshakePayload|expectedHttpStatusCode|
-|misspelled tag|<HANDSHAKE_MESSAGES><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom unixtimeformatstring="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </HANDSHAKE_MESSAGES> |400|
-|add parameter|<hand-shake-messages unit="m"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom unixtimeformatstring="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
-|add parameter|<hand-shake-messages version="01.0"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom unixtimeformatstring="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
-
-
-
-
 # Text format cases
 Scenario: Verify return Status code for HANDSHAKE_MESSAGES Server
     When I send a POST request to "https://myserver-with-some-endpoint-accepting-post-xml-octetstream-payload" with the following text-xml-payload
@@ -263,3 +231,33 @@ Examples:
 |add parameter|<hand-shake-messages unit="m"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom timestamp="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
 |add parameter|<hand-shake-messages version="01.0"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom timestamp="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
 |add parameter|<hand-shake-messages version="1.0"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom timestamp="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
+
+
+Scenario Outline: Verify various API return Status codes for HANDSHAKE_MESSAGES Server for MACHINE_CODE_FORMAT Format
+    When I POST a MACHINE_CODE_FORMAT API request to "https://myserver-with-some-endpoint-accepting-post-xml-octetstream-payload" with the following text-xml-payload
+      """
+      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <sample-session>
+        <custom-standard format="MACHINE_CODE_FORMAT" messagesize="50000" sessionsize="1000">
+          <sample-code_0 id="ref-format-code_0" version="1.3"/>
+          <sample-code_0 id="ref-format-code_1" version="1.0"/>
+          <tool id="tool-format-id-0" version="3.0"/>
+          <tool id="tool-format-id-1" version="1.0" session-limit="17"/>
+        </custom-standard>
+        <markets current="DE" destination="FR"/>
+        <general>
+          <parameter name="region-limit" value="1"/>
+          <parameter name="session-limit" value="600"/>
+          <parameter name="time-limit" value="300"/>
+          <parameter name="frequency" value="180"/>
+        </general>
+      </sample-session>
+    """ 
+     Then the intSessionResponse for the MACHINE_CODE_FORMAT API requested should be "200"
+     Then /^I should see: "<expectedHttpStatusCode>" for MACHINE_CODE_FORMAT format if I query "<%= handshake-server %>" with the handshakePayload: "<handshakePayload>" 
+     
+Examples:
+|testCaseType|handshakePayload|expectedHttpStatusCode|
+|misspelled tag|<HANDSHAKE_MESSAGES><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom unixtimeformatstring="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </HANDSHAKE_MESSAGES> |400|
+|add parameter|<hand-shake-messages unit="m"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom unixtimeformatstring="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
+|add parameter|<hand-shake-messages version="01.0"><places><loc lat="48.14111" lon="11.56916"/></places><feasibility value="47"/><my-custom-list unit-temp="C"><custom unixtimeformatstring="YYYY-MM-DDTHH:MM:SS:ZZZ" lat="48.14111" lon="11.56916" heading="192" velocity="25" temp="18"/></my-custom-list> </hand-shake-messages> |400|
