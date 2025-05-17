@@ -1,4 +1,4 @@
-bdd
+BDD
 ===
 
-especially to highlight the cases in a behavior oriented language - ruby and cucumber
+Use Case Examples - Simple + Complex
